@@ -20,9 +20,9 @@ let transporter = nodemailer.createTransport({
 });
 
 app.post('/send-email', (req, res) => {
-    const { to, text , key } = req.body;
+    const { to, html , key } = req.body;
   
-    if (!to || !text || !key) {
+    if (!to || !html || !key) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
   
@@ -30,7 +30,7 @@ app.post('/send-email', (req, res) => {
       from: `"CabCeylon" <${process.env.MAIL_FROM_ADDRESS}>`, 
       to: [to,'cabceylon02@gmail.com'], 
       subject: 'CabCeylon Vehicle Booking',
-      text: text,
+      html: html,
     };
   
     if(key == process.env.KEY){
